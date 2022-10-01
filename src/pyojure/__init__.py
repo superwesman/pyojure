@@ -1,1 +1,2 @@
-from core import *
+from functools import reduce
+from pyojure.core import *

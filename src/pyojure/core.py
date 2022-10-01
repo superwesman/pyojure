@@ -16,11 +16,30 @@ def partition(n, coll):
         yield coll[i: i + n]
 
 
-def assoc(d, *ts):
+def assoc(d, *kvs):
     """produce a copy of d with ts in it"""
     def assoc1(m, k, v):
         n = m.copy()
         n[k] = v
         return n
 
-    return functools.reduce(lambda m, t: assoc1(m, t[0], t[1]), partition(2, ts), d)
+    return functools.reduce(lambda m, kv: assoc1(m, kv[0], kv[1]), partition(2, kvs), d)
+
+
+def dissoc(d, *ks):
+    """produce a copy of d without ts in it"""
+    def dissoc1(m, k):
+        n = m.copy()
+        n.pop(k)
+        return n
+    return functools.reduce(lambda m, k: dissoc1(m, k), ks, d)
+
+
+def dec(x):
+    return x - 1
+
+
+def inc(x):
+    return x + 1
+
+
