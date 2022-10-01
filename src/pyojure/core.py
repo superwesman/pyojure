@@ -43,3 +43,6 @@ def inc(x):
     return x + 1
 
 
+def mapv(*args, **kwargs):
+    """technically mapl, since python doesn't have a vector type"""
+    return comp(list, map)(*args, **kwargs)
