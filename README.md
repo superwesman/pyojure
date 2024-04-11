@@ -6,14 +6,16 @@ make python more like clojure
 
 ## Usage
 
-```python
-from pyojure import *
+```pycon
+>>> from pyojure import *
+>>> mapv(print, dir())
+```
 
+```pycon
 >>> assoc({"this": "is"}, "very", "cool")
 {'this': 'is', 'very': 'cool'}
 >>> comp(str, inc, int)('123')
 '124'
 >>> list(partition(2, [1,2,3,4,5,6,7,8,9]))
 [[1, 2], [3, 4], [5, 6], [7, 8], [9]]
-
 ```
