@@ -17,7 +17,7 @@ def partition(n, coll):
 
 
 def assoc(d, *kvs):
-    """produce a copy of d with ts in it"""
+    """produce a copy of d with kvs in it"""
     def assoc1(m, k, v):
         n = m.copy()
         n[k] = v
@@ -27,7 +27,7 @@ def assoc(d, *kvs):
 
 
 def dissoc(d, *ks):
-    """produce a copy of d without ts in it"""
+    """produce a copy of d without ks in it"""
     def dissoc1(m, k):
         n = m.copy()
         n.pop(k)
@@ -43,6 +43,14 @@ def inc(x):
     return x + 1
 
 
-def mapv(*args, **kwargs):
-    """technically mapl, since python doesn't have a vector type"""
+def mapl(*args, **kwargs):
+    """Similar to 'mapv' but using Python List type"""
     return comp(list, map)(*args, **kwargs)
+
+
+mapv = mapl  # a convenience for clojure developers
+
+
+def identity(x):
+    return x
+
