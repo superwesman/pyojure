@@ -1,6 +1,6 @@
 """core functions that clojure has but python doesn't"""
 
-import functools
+from functools import reduce
 
 
 def comp(*fs):
@@ -8,7 +8,7 @@ def comp(*fs):
     def comp2(f, g):
         return lambda *a, **kw: f(g(*a, **kw))
 
-    return functools.reduce(comp2, fs)
+    return reduce(comp2, fs)
 
 
 def partition(n, coll):
@@ -23,7 +23,12 @@ def assoc(d, *kvs):
         n[k] = v
         return n
 
-    return functools.reduce(lambda m, kv: assoc1(m, kv[0], kv[1]), partition(2, kvs), d)
+    return reduce(lambda m, kv: assoc1(m, kv[0], kv[1]), partition(2, kvs), d)
+
+
+def concat(*xs):
+    """concatenate collections into one collection"""
+    return reduce(list.__add__, xs)
 
 
 def dissoc(d, *ks):
@@ -32,7 +37,7 @@ def dissoc(d, *ks):
         n = m.copy()
         n.pop(k)
         return n
-    return functools.reduce(lambda m, k: dissoc1(m, k), ks, d)
+    return reduce(lambda m, k: dissoc1(m, k), ks, d)
 
 
 def dec(x):
