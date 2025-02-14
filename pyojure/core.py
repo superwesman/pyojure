@@ -1,6 +1,6 @@
 """core functions that clojure has but python doesn't"""
 
-from functools import reduce
+from functools import partial, reduce
 
 
 def comp(*fs):
