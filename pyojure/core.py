@@ -16,6 +16,11 @@ def partition(n, coll):
         yield coll[i: i + n]
 
 
+def concat(*xs):
+    """concatenate collections into one collection"""
+    return reduce(list.__add__, xs)
+
+
 def assoc(d, *kvs):
     """produce a copy of d with kvs in it"""
     def assoc1(m, k, v):
@@ -24,11 +29,6 @@ def assoc(d, *kvs):
         return n
 
     return reduce(lambda m, kv: assoc1(m, kv[0], kv[1]), partition(2, kvs), d)
-
-
-def concat(*xs):
-    """concatenate collections into one collection"""
-    return reduce(list.__add__, xs)
 
 
 def dissoc(d, *ks):
@@ -59,3 +59,19 @@ mapv = mapl  # a convenience for clojure developers
 def identity(x):
     return x
 
+
+def is_even(x):
+    return x % 2 == 0
+
+
+def is_odd(x):
+    return not(is_even(x))
+
+
+def every_pred(*ps):
+    """return True if EVERY PREDICATE FUNCTION returns True-ish"""
+    def inner(x):
+        return reduce(lambda b, f: b and f(x),
+                      ps,
+                      True)
+    return inner
