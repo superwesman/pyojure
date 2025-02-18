@@ -75,3 +75,20 @@ def every_pred(*ps):
                       ps,
                       True)
     return inner
+
+
+def first(coll):
+    return coll[0]
+
+
+def rest(coll):
+    return coll[1:]
+
+
+def last(coll):
+    return coll[-1]
+
+
+def but_last(coll):
+    return coll[0:-1]
+
