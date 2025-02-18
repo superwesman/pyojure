@@ -80,12 +80,25 @@ def is_odd(x):
 
 
 def every_pred(*ps):
-    """return True if EVERY PREDICATE FUNCTION returns Trueish"""
+    """takes a collection of predicate functions and returns a predicate function that returns True if all
+     of the supplied predicate functions returns True-ish"""
 
     def inner(x):
         return reduce(lambda b, f: b and f(x),
                       ps,
                       True)
+
+    return inner
+
+
+def some_fn(*ps):
+    """takes a collection of predicate functions and returns a predicate function that returns the first
+    True-ish value returned by one of the supplied predicate functions"""
+
+    def inner(x):
+        return reduce(lambda b, f: b or f(x),
+                      ps,
+                      False)
 
     return inner
 
@@ -108,3 +121,11 @@ def last(coll):
 def but_last(coll):
     """return everything except the last item from coll"""
     return coll[0:1]
+
+
+def complement(f):
+    """"returns a function that takes the same arguments as f, performs the same side effects as f (if any) and
+    returns the opposite truth value as f"""
+    def inner(*args, **kwargs):
+        return not f(*args, **kwargs)
+    return inner
