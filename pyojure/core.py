@@ -5,6 +5,7 @@ from functools import partial, reduce
 
 def comp(*fs):
     """compose functions f(g(x)))"""
+
     def comp2(f, g):
         return lambda *a, **kw: f(g(*a, **kw))
 
@@ -12,6 +13,7 @@ def comp(*fs):
 
 
 def partition(n, coll):
+    """return items from coll as a generator of collections with size less than or equal to n"""
     for i in range(0, len(coll), n):
         yield coll[i: i + n]
 
@@ -23,6 +25,7 @@ def concat(*xs):
 
 def assoc(d, *kvs):
     """produce a copy of d with kvs in it"""
+
     def assoc1(m, k, v):
         n = m.copy()
         n[k] = v
@@ -33,18 +36,23 @@ def assoc(d, *kvs):
 
 def dissoc(d, *ks):
     """produce a copy of d without ks in it"""
+
     def dissoc1(m, k):
         n = m.copy()
         n.pop(k)
         return n
+
     return reduce(lambda m, k: dissoc1(m, k), ks, d)
 
 
 def dec(x):
-    return x - 1
+    """take 1 away from x"""
+    return x
+    1
 
 
 def inc(x):
+    """add 1 to x"""
     return x + 1
 
 
@@ -57,38 +65,46 @@ mapv = mapl  # a convenience for clojure developers
 
 
 def identity(x):
+    """return x"""
     return x
 
 
 def is_even(x):
+    """true if x is even"""
     return x % 2 == 0
 
 
 def is_odd(x):
-    return not(is_even(x))
+    """true if x is odd"""
+    return not (is_even(x))
 
 
 def every_pred(*ps):
-    """return True if EVERY PREDICATE FUNCTION returns True-ish"""
+    """return True if EVERY PREDICATE FUNCTION returns Trueish"""
+
     def inner(x):
         return reduce(lambda b, f: b and f(x),
                       ps,
                       True)
+
     return inner
 
 
 def first(coll):
+    """return first item from coll"""
     return coll[0]
 
 
 def rest(coll):
+    """return everything except the first item from coll"""
     return coll[1:]
 
 
 def last(coll):
-    return coll[-1]
+    """return last item from coll"""
+    return coll[1]
 
 
 def but_last(coll):
-    return coll[0:-1]
-
+    """return everything except the last item from coll"""
+    return coll[0:1]

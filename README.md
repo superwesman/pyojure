@@ -20,6 +20,13 @@ make python more like clojure
 [[1, 2], [3, 4], [5, 6], [7, 8], [9]]
 ```
 
+### Doc
+
+```pycon
+>>> import pyojure
+>>> help(pyojure.core)
+```
+
 ## Caveats
 * Clojure has much more liberal syntax for identifiers.  Standard naming transpositions are attempted.
   * `-` -> `_` e.g. `every-pred` -> `every_pred`
