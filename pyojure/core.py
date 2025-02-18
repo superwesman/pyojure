@@ -63,7 +63,9 @@ def mapl(*args, **kwargs):
 
 mapv = mapl  # a convenience for clojure developers
 
-mapcat = comp(concat, mapl)
+
+def mapcat(f, coll):
+    return concat(*mapl(f, coll))
 
 
 def filterl(*args, **kwargs):
@@ -150,3 +152,6 @@ def is_none(x):
 def is_not_none(x):
     return x is not None
 
+
+def remove(f, coll):
+    return filter(complement(f), coll)
