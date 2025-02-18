@@ -63,6 +63,16 @@ def mapl(*args, **kwargs):
 
 mapv = mapl  # a convenience for clojure developers
 
+mapcat = comp(concat, mapl)
+
+
+def filterl(*args, **kwargs):
+    """Similar to 'filterv' but using Python List type"""
+    return comp(list, filter)(*args, **kwargs)
+
+
+filterv = filterl  # a convenience for clojure developers
+
 
 def identity(x):
     """return x"""
@@ -126,6 +136,8 @@ def but_last(coll):
 def complement(f):
     """"returns a function that takes the same arguments as f, performs the same side effects as f (if any) and
     returns the opposite truth value as f"""
+
     def inner(*args, **kwargs):
         return not f(*args, **kwargs)
+
     return inner
